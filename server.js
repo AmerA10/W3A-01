@@ -169,12 +169,6 @@ app.get("/api/circuits/season/:year", async (req, resp) => {
 
 app.get("/api/races/:raceId", async (req, resp) => {
   
-  if (!Number.isInteger(req.params.raceId)) {
-    errorHandler(null, req, resp, "raceId should be a number");
-    return;
-  }
-  
-  
   const { data, error } = await supabase
     .from("races")
     .select(
