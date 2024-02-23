@@ -1,4 +1,5 @@
 Creater: Amer Alagami
+All of the code is in the 'server.js' file
 
 API LIST:
 - BASE LINK: https://automatic-glowing-tourmaline.glitch.me/
