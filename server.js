@@ -251,10 +251,6 @@ app.get("/api/races/circuits/:ref/season/:start/:end", async (req, resp) => {
 });
 
 app.get("/api/results/:raceId", async (req, resp) => {
-  if (!Number.isInteger(req.params.raceId)) {
-    errorHandler(null, req, resp, "raceId should be a number");
-    return;
-  }
 
   const { data, error } = await supabase
     .from("results")
@@ -308,10 +304,6 @@ app.get("/api/results/driver/:ref/seasons/:start/:end", async (req, resp) => {
 });
 
 app.get("/api/qualifying/:raceId", async (req, resp) => {
-  if (!Number.isInteger(req.params.raceId)) {
-    errorHandler(null, req, resp, "raceId should be a number");
-    return;
-  }
 
   const { data, error } = await supabase
     .from("qualifying")
@@ -328,10 +320,7 @@ app.get("/api/qualifying/:raceId", async (req, resp) => {
 });
 
 app.get("/api/standings/:raceId/drivers", async (req, resp) => {
-  if (!Number.isInteger(req.params.raceId)) {
-    errorHandler(null, req, resp, "raceId should be a number");
-    return;
-  }
+
 
   const { data, error } = await supabase
     .from("driver_standings")
@@ -347,10 +336,6 @@ app.get("/api/standings/:raceId/drivers", async (req, resp) => {
 });
 
 app.get("/api/standings/:raceId/constructors", async (req, resp) => {
-  if (!Number.isInteger(req.params.raceId)) {
-    errorHandler(null, req, resp, "raceId should be a number");
-    return;
-  }
 
   const { data, error } = await supabase
     .from("constructor_standing")
