@@ -2,7 +2,7 @@ Creater: Amer Alagami
 
 API LIST:
 - BASE LINK: https://automatic-glowing-tourmaline.glitch.me/
-- [/api/seasons](https://automatic-glowing-tourmaline.glitch.me/api/season)
+- [/api/seasons](https://automatic-glowing-tourmaline.glitch.me/api/seasons)
 - [/api/circuits](https://automatic-glowing-tourmaline.glitch.me/api/circuits)
 - [/api/constructors](https://automatic-glowing-tourmaline.glitch.me/api/constructors)
 - [/api/constructors/:ref](https://automatic-glowing-tourmaline.glitch.me/api/constructors/:ref)
