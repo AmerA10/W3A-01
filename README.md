@@ -2,7 +2,6 @@ Creater: Amer Alagami
 
 API LIST:
 - BASE LINK: https://automatic-glowing-tourmaline.glitch.me/
-- The following are just the link
 - [/api/seasons](https://automatic-glowing-tourmaline.glitch.me/api/seasons)
 - [/api/circuits](https://automatic-glowing-tourmaline.glitch.me/api/circuits)
 - [/api/circuits/monza](https://automatic-glowing-tourmaline.glitch.me/api/circuits/monza)
