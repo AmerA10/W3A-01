@@ -43,9 +43,19 @@ app.get("/api/seasons", async (req, resp) => {
 
   resp.send(data);
 });
+app.get("/", async(req,resp) => {
+  errorHandler(null,req,resp, "Check Read me file for API calls available");
+  return;
+  
+});
+app.get("/api/", async(req,resp) => {
+  errorHandler(null,req,resp, "Check Read me file for API calls available");
+  return;
+  
+});
 
 app.get("/api/circuits", async (req, resp) => {
-  const { data, errror } = await supabase.from("circuits").select();
+  const { data, error } = await supabase.from("circuits").select();
   if (checkError(data, error, req, resp)) {
     return;
   }
@@ -111,6 +121,13 @@ app.get("/api/drivers/search/:substring", async (req, resp) => {
 });
 
 app.get("/api/drivers/race/:raceId", async (req, resp) => {
+  
+  
+  if (!Number.isInteger(req.params.raceId)) {
+    errorHandler(null, req, resp, "raceId should be a number");
+    return;
+  }
+  
   const { data, error } = await supabase
     .from("drivers")
     .select(`*, qualifying!inner()`)
@@ -151,6 +168,13 @@ app.get("/api/circuits/season/:year", async (req, resp) => {
 });
 
 app.get("/api/races/:raceId", async (req, resp) => {
+  
+  if (!Number.isInteger(req.params.raceId)) {
+    errorHandler(null, req, resp, "raceId should be a number");
+    return;
+  }
+  
+  
   const { data, error } = await supabase
     .from("races")
     .select(
@@ -204,6 +228,15 @@ app.get("/api/races/circuits/:ref", async (req, resp) => {
 });
 
 app.get("/api/races/circuits/:ref/season/:start/:end", async (req, resp) => {
+  if (req.params.end < req.params.start) {
+    errorHandler(
+      null,
+      req,
+      resp,
+      "End Date must be more than or equal to start date"
+    );
+    return;
+  }
   const { data, error } = await supabase
     .from("races")
     .select("*, circuits!inner()")
@@ -218,6 +251,11 @@ app.get("/api/races/circuits/:ref/season/:start/:end", async (req, resp) => {
 });
 
 app.get("/api/results/:raceId", async (req, resp) => {
+  if (!Number.isInteger(req.params.raceId)) {
+    errorHandler(null, req, resp, "raceId should be a number");
+    return;
+  }
+
   const { data, error } = await supabase
     .from("results")
     .select(
@@ -241,11 +279,21 @@ app.get("/api/results/driver/:ref", async (req, resp) => {
   if (checkError(data, error, req, resp)) {
     return;
   }
-  
+
   resp.send(data);
 });
 
 app.get("/api/results/driver/:ref/seasons/:start/:end", async (req, resp) => {
+  if (req.params.end < req.params.start) {
+    errorHandler(
+      null,
+      req,
+      resp,
+      "End Date must be more than or equal to start date"
+    );
+    return;
+  }
+
   const { data, error } = await supabase
     .from("results")
     .select("*, drivers!inner(), races!inner()")
