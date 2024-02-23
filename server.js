@@ -76,7 +76,7 @@ app.get("/api/constructors/:ref", async (req, resp) => {
   const { data, error } = await supabase
     .from("constructors")
     .select("*")
-    .eq("constructorRef", req.params.ref);
+    .eq("constructorRef", req.params.ref.toLowerCase());
 
   if (checkError(data, error, req, resp)) {
     return;
@@ -94,7 +94,7 @@ app.get("/api/drivers/:ref", async (req, resp) => {
   const { data, error } = await supabase
     .from("drivers")
     .select()
-    .eq("driverRef", req.params.ref);
+    .eq("driverRef", req.params.ref.toLowerCase());
   if (checkError(data, error, req, resp)) {
     return;
   }
@@ -143,7 +143,7 @@ app.get("/api/circuits/:ref", async (req, resp) => {
   const { data, error } = await supabase
     .from("circuits")
     .select("*")
-    .eq("circuitRef", req.params.ref)
+    .eq("circuitRef", req.params.ref.toLowerCase())
     .limit(1);
 
   if (checkError(data, error, req, resp)) {
@@ -218,7 +218,7 @@ app.get("/api/races/circuits/:ref", async (req, resp) => {
   const { data, error } = await supabase
     .from("races")
     .select("*, circuits!inner()")
-    .eq("circuits.circuitRef", req.params.ref)
+    .eq("circuits.circuitRef", req.params.ref.toLowerCase())
     .order("year", { ascending: true });
 
   if (checkError(data, error, req, resp)) {
@@ -240,7 +240,7 @@ app.get("/api/races/circuits/:ref/season/:start/:end", async (req, resp) => {
   const { data, error } = await supabase
     .from("races")
     .select("*, circuits!inner()")
-    .eq("circuits.circuitRef", req.params.ref)
+    .eq("circuits.circuitRef", req.params.ref.toLowerCase())
     .gte("year", req.params.start)
     .lte("year", req.params.end);
 
@@ -270,7 +270,7 @@ app.get("/api/results/driver/:ref", async (req, resp) => {
   const { data, error } = await supabase
     .from("results")
     .select("*, drivers!inner()")
-    .eq("drivers.driverRef", req.params.ref);
+    .eq("drivers.driverRef", req.params.ref.toLowerCase());
 
   if (checkError(data, error, req, resp)) {
     return;
@@ -295,7 +295,7 @@ app.get("/api/results/driver/:ref/seasons/:start/:end", async (req, resp) => {
     .select("*, drivers!inner(), races!inner()")
     .gte("races.year", req.params.start)
     .lte("races.year", req.params.end)
-    .eq("drivers.driverRef", req.params.ref);
+    .eq("drivers.driverRef", req.params.ref.toLowerCase());
 
   if (checkError(data, error, req, resp)) {
     return;
